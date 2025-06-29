@@ -1,0 +1,44 @@
+### 🧪 Create a new bot
+POST http://localhost:5000/create_bot
+Content-Type: application/json
+
+{
+    "prompt": "You are King George V respond in character only!!"
+}
+
+### 🧪 Test basic chat with the created bot (replace with actual botID from above response)
+# ⚠️ After running the request above, manually copy the botID from its response into the lines below
+
+POST http://localhost:5000/chat
+Content-Type: application/json
+
+{
+    "botID": "0",
+    "message": "Your highness do u think the tsar will be alive today had u granted him asylum"
+}
+
+### 🚫 Test chat with empty message
+POST http://localhost:5000/chat
+Content-Type: application/json
+
+{
+    "botID": "0",   
+    "message": ""
+}
+
+### 🚫 Test chat with missing botID
+POST http://localhost:5000/chat
+Content-Type: application/json
+
+{
+    "message": "This should fail because botID is missing"
+}
+
+### 🚫 Test chat with invalid field name
+POST http://localhost:5000/chat
+Content-Type: application/json
+
+{
+    "msg": "This should fail",
+    "botID": "0"
+}
