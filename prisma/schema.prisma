@@ -28,7 +28,7 @@ model Character {
 model Conversation {
   id          String       @id @default(cuid())
   userId      String       // The user who is chatting
-  characterId String
+  characterId String       // The BOT being conversed with
   character   Character    @relation(fields: [characterId], references: [id])
   createdAt   DateTime     @default(now())
 
