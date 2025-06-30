@@ -1,8 +1,14 @@
 import express from "express";
 import chat from "./api/chat.js";
 import dotenv from "dotenv";
+import { createClient } from '@supabase/supabase-js'
 
 dotenv.config();
+
+
+const supabaseUrl = 'https://cgxbpomamztmklxhhydm.supabase.co'
+const supabaseKey = process.env.SUPABASE_KEY
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 const app = express();
 const port = process.env.PORT || 3000;

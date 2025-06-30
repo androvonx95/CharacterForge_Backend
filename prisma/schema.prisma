@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Character {
+  id        String       @id @default(cuid())
+  name      String
+  prompt    String
+  userId    String       // The creator of the bot (external auth ID)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  conversations Conversation[]
+}
+
+model Conversation {
+  id          String       @id @default(cuid())
+  userId      String       // The user who is chatting
+  characterId String
+  character   Character    @relation(fields: [characterId], references: [id])
+  createdAt   DateTime     @default(now())
+
+  messages    Message[]
+}
+
+model Message {
+  id              String        @id @default(cuid())
+  conversationId  String
+  conversation    Conversation  @relation(fields: [conversationId], references: [id])
+  role            Role
+  content         String
+  createdAt       DateTime      @default(now())
+}
+
+model UserMetadata {
+  id        String   @id @default(cuid())
+  userId    String   @unique // Supabase user ID
+  name      String?
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  user
+  character
+}

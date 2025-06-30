@@ -13,7 +13,8 @@ async function chat( messages ) {
     max_tokens: 200,
   });
 
-//   console.log("🤖 Luna:", chatCompletion.choices[0].message.content);
-return chatCompletion.choices[0].message.content;}
+  //   console.log("🤖 Luna:", chatCompletion.choices[0].message.content);
+  return chatCompletion.choices[0].message.content;
+}
 
 export default chat;
