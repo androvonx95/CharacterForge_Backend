@@ -9,8 +9,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
 
@@ -21,8 +21,10 @@ model Character {
   userId    String       // The creator of the bot (external auth ID)
   createdAt DateTime     @default(now())
   updatedAt DateTime     @updatedAt
+  private   Boolean      @default(false)
 
   conversations Conversation[]
+
 }
 
 model Conversation {
@@ -33,6 +35,7 @@ model Conversation {
   createdAt   DateTime     @default(now())
 
   messages    Message[]
+
 }
 
 model Message {
@@ -49,6 +52,7 @@ model UserMetadata {
   userId    String   @unique // Supabase user ID
   name      String?
   createdAt DateTime @default(now())
+
 }
 
 enum Role {
