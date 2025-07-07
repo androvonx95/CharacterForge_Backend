@@ -1,5 +1,6 @@
-import { InferenceClient } from "@huggingface/inference";
-import dotenv from "dotenv";
+const { InferenceClient } = require("@huggingface/inference");
+const dotenv = require("dotenv");
+
 dotenv.config();
 
 const client = new InferenceClient(process.env.HF_TOKEN);
@@ -17,4 +18,4 @@ async function chat( messages ) {
   return chatCompletion.choices[0].message.content;
 }
 
-export default chat;
+module.exports = chat;

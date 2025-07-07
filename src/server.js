@@ -1,64 +1,53 @@
-import express from "express";
-import chat from "./api/chat.js";
-import dotenv from "dotenv";
- 
+const express = require("express");
+const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
+const { errorHandler } = require("./auth/errorHandler.js");
+const authRoutes = require("./auth/routes.js");
+const chatRoutes = require("./api/chatRoutes.js");
+
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+
+// Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser()); // Add cookie parser
 
-// Store contexts for different bots by their ID
-const contexts = {};
-let botCounter = 0; // Counter to assign incremental bot IDs
-
-// Create a new bot instance
-app.post("/create_bot", (req, res) => {
-  const botID = botCounter.toString();
-  const bot = req.body.prompt;
-  botCounter++;
-
-  const context = [
-    {
-      role: "system",
-      content: bot
-    }
-  ];
-
-  contexts[botID] = context;
-
-  res.json({ botID, message: "Bot created successfully." });
+// CORS configuration for frontend access
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL || '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Credentials', true);
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
 });
 
-// Chat with a specific bot by ID
-app.post("/chat", async (req, res) => {
-  const { botID, message } = req.body;
+// Routes
+app.use('/auth', authRoutes);
 
-  if (!botID || !message) {
-    return res
-      .status(400)
-      .json({ error: "Both botID and message are required." });
-  }
-
-  const context = contexts[botID];
-  if (!context) {
-    return res.status(404).json({ error: "Bot ID not found." });
-  }
-
-  try {
-    context.push({ role: "user", content: message });
-    const botReply = await chat([...context]); // clone to avoid mutations
-    context.push({ role: "assistant", content: botReply });
-
-    res.json({ response: botReply });
-  } catch (error) {
-    console.error("Error during API call:", error);
-    res.status(500).json({ error: "Failed to get response from the model." });
-  }
+// Protected route example
+app.get('/protected', require('./auth/authMiddleware').requireAuth, (req, res) => {
+  res.json({ message: 'This is a protected route', user: req.user });
 });
 
-console.log( contexts );
+// Basic route
+app.get('/', (req, res) => {
+  res.json({ message: 'API is running' });
+});
+
+// Use chat routes
+app.use('/', chatRoutes);
+
+// Error handling middleware
+app.use(errorHandler);
+
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
