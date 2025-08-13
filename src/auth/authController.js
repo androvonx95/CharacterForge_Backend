@@ -75,11 +75,6 @@ const login = async (req, res) => {
         refresh_token: data.session.refresh_token
       });
       
-      return res.status(200).json({ 
-        message: 'Login successful', 
-        user: data.user
-        // Don't send the tokens in the response body if using cookies
-      });
     } catch (error) {
       console.error('Login error:', error);
       return res.status(500).json({ error: 'Internal server error' });

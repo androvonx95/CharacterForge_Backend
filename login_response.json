@@ -1,0 +1,80 @@
+  curl -X POST https://fdefjilkbllgjldtqwwe.supabase.co/functions/v1/paginator \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6Ijg0OW10eGVsb0JCVGxLOFQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2ZkZWZqaWxrYmxsZ2psZHRxd3dlLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiIwNTFlZmU2My1jZGNhLTRhYTItYmU1Ny1hMjA2NWE0ZGEwMjAiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU0ODEyNjc3LCJpYXQiOjE3NTQ4MDkwNzcsImVtYWlsIjoidmN6YXJ0KzYybzcwdTU2ZW84cndAc2hhcmtsYXNlcnMuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJlbWFpbCI6InZjemFydCs2Mm83MHU1NmVvOHJ3QHNoYXJrbGFzZXJzLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaG9uZV92ZXJpZmllZCI6ZmFsc2UsInN1YiI6IjA1MWVmZTYzLWNkY2EtNGFhMi1iZTU3LWEyMDY1YTRkYTAyMCJ9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzU0ODA5MDc3fV0sInNlc3Npb25faWQiOiJkYWRhMzY0Ni1kYmYwLTQ1MGMtODU0ZS0wM2U3YWU2NjA3NGMiLCJpc19hbm9ueW1vdXMiOmZhbHNlfQ.TsteFbnAoRrXDcZ5xM8YiTjMK_UbQXOzaacZqBUM_sM" \
+    -d "{
+      \"conversationId\": \"eaf59d97-845c-4dcb-a6fd-6da20e6216d3\",
+      \"startingIdx\": 0
+    }"
+  
+
+
+  
+
+
+2a67a65b-df7d-496c-84ab-1559f16bc210
+
+  curl -X POST http://localhost:5000/create_bot \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6Ijg0OW10eGVsb0JCVGxLOFQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2ZkZWZqaWxrYmxsZ2psZHRxd3dlLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiIwNTFlZmU2My1jZGNhLTRhYTItYmU1Ny1hMjA2NWE0ZGEwMjAiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU0OTA1OTgxLCJpYXQiOjE3NTQ5MDIzODEsImVtYWlsIjoidmN6YXJ0KzYybzcwdTU2ZW84cndAc2hhcmtsYXNlcnMuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJlbWFpbCI6InZjemFydCs2Mm83MHU1NmVvOHJ3QHNoYXJrbGFzZXJzLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaG9uZV92ZXJpZmllZCI6ZmFsc2UsInN1YiI6IjA1MWVmZTYzLWNkY2EtNGFhMi1iZTU3LWEyMDY1YTRkYTAyMCJ9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzU0OTAyMzgxfV0sInNlc3Npb25faWQiOiIyZGMzYWZkZi0yMTg2LTRjMGYtODEzNy1lM2QyMGQzOTkwODYiLCJpc19hbm9ueW1vdXMiOmZhbHNlfQ.a8NJJr2MEVIKvrWBmh7cMnuFwGHwMor9NrZ33uYJPOg" \
+  -d "{
+    \"name\": \"Batman\",
+    \"prompt\": \"You are roleplaying as Bruce Wayne / Batman, specifically the darker, brooding version drawn from a post-Arkham Gotham—a city barely holding itself together after the collapse of the Arkham Asylum system and a brutal wave of meta-crime. This Batman is weary, hardened, and operating in the moral gray: still committed to his no-kill rule, but constantly challenged by the escalating madness around him. Gotham has become more dangerous than ever, with underground syndicates, black market magic, and cybernetic enhancements flooding the streets. Trust is a rare commodity. You, as Batman, are not just a brute-force vigilante; you are a tactician, a detective, and a psychological wall—always calculating, observing, and speaking only when necessary. The person you're speaking with (me) is someone new to your orbit: perhaps an ex-intelligence operative, a rogue meta-human, or an original character who’s been forced into Gotham’s shadow world. You don’t trust them yet—maybe never will—but circumstances require you to work with them. Set the opening scene in the Batcave, late at night. A storm brews outside. Alfred is gone. The visitor arrives uninvited, or perhaps you summoned them—but either way, you’re already ten steps ahead of them in terms of information. Stay in character as Bruce/Batman: speak with economy, precision, and authority. Use atmospheric detail and inner monologue where appropriate. Keep the tone noir, gritty, and psychologically intense. This is not a high-fantasy superhero—this is the man in the shadows who stares down gods and monsters with nothing but his mind, fists, and broken soul. Begin the RP as the visitor enters the cave—and the Bat speaks.\",
+    \"private\": false
+  }"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+curl -X POST \
+"https://fdefjilkbllgjldtqwwe.supabase.co/functions/v1/ai-chat" \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6Ijg0OW10eGVsb0JCVGxLOFQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2ZkZWZqaWxrYmxsZ2psZHRxd3dlLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiIwNTFlZmU2My1jZGNhLTRhYTItYmU1Ny1hMjA2NWE0ZGEwMjAiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU0OTM1MDAyLCJpYXQiOjE3NTQ5MzE0MDIsImVtYWlsIjoidmN6YXJ0KzYybzcwdTU2ZW84cndAc2hhcmtsYXNlcnMuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJlbWFpbCI6InZjemFydCs2Mm83MHU1NmVvOHJ3QHNoYXJrbGFzZXJzLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaG9uZV92ZXJpZmllZCI6ZmFsc2UsInN1YiI6IjA1MWVmZTYzLWNkY2EtNGFhMi1iZTU3LWEyMDY1YTRkYTAyMCJ9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzU0OTMxNDAyfV0sInNlc3Npb25faWQiOiI5ZmQ5YTQ4ZS01NDQzLTRkNjctYmQwYS1lMTkxYjA3ZmRmOTYiLCJpc19hbm9ueW1vdXMiOmZhbHNlfQ.sqjFQeLjeY2DAnd4FVgc9Z8YG6pSW2FEHeDN_vyE2OA" \
+-d '{
+  "messageContent": "I quickly put on the guards outfits yo bat boy u need to get changed to we gotta sneak in to this facility not entertain kids at a birthday party",
+  "conversationId": "c498eea6-2444-4fba-82ca-9035d423c448"
+}'
+
+
+
+
+curl -X POST "https://fdefjilkbllgjldtqwwe.supabase.co/functions/v1/ai-chat" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6Ijg0OW10eGVsb0JCVGxLOFQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2ZkZWZqaWxrYmxsZ2psZHRxd3dlLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiIwNTFlZmU2My1jZGNhLTRhYTItYmU1Ny1hMjA2NWE0ZGEwMjAiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU0OTQyODM0LCJpYXQiOjE3NTQ5MzkyMzQsImVtYWlsIjoidmN6YXJ0KzYybzcwdTU2ZW84cndAc2hhcmtsYXNlcnMuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJlbWFpbCI6InZjemFydCs2Mm83MHU1NmVvOHJ3QHNoYXJrbGFzZXJzLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaG9uZV92ZXJpZmllZCI6ZmFsc2UsInN1YiI6IjA1MWVmZTYzLWNkY2EtNGFhMi1iZTU3LWEyMDY1YTRkYTAyMCJ9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzU0OTM5MjM0fV0sInNlc3Npb25faWQiOiJlYzhlYzY1ZS02MzliLTQ2NjgtOTVhNC02MzU4N2M0OGI4ZGYiLCJpc19hbm9ueW1vdXMiOmZhbHNlfQ.w9yCGl4DThkaKTM9EQVUVrhX3qYetqL0wxz_qZow13A"
+" -d '{
+  "messageContent": "I am sorry for ur loss it must be hard miss",
+  "conversationId": "7a84920f-4cb8-49af-9cf3-6efb584adc1e"
+}'
+
+2f2ribc5lubl
+
+
+
+
+
+curl -X POST \
+"https://fdefjilkbllgjldtqwwe.supabase.co/functions/v1/ai-chat" \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6Ijg0OW10eGVsb0JCVGxLOFQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2ZkZWZqaWxrYmxsZ2psZHRxd3dlLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiIwNTFlZmU2My1jZGNhLTRhYTItYmU1Ny1hMjA2NWE0ZGEwMjAiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU0OTcxOTk2LCJpYXQiOjE3NTQ5NjgzOTYsImVtYWlsIjoidmN6YXJ0KzYybzcwdTU2ZW84cndAc2hhcmtsYXNlcnMuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJlbWFpbCI6InZjemFydCs2Mm83MHU1NmVvOHJ3QHNoYXJrbGFzZXJzLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaG9uZV92ZXJpZmllZCI6ZmFsc2UsInN1YiI6IjA1MWVmZTYzLWNkY2EtNGFhMi1iZTU3LWEyMDY1YTRkYTAyMCJ9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzU0OTY4Mzk2fV0sInNlc3Npb25faWQiOiI4OGZjOWUzNS02N2I3LTQ3ZjgtOWViNS00OGJiOWQ1NTdlMzQiLCJpc19hbm9ueW1vdXMiOmZhbHNlfQ.RP1FtMqaZyU-bRDCuJzMC3g_fGw9-smUqxKK2V0AObA" \
+-d '{
+  "messageContent": "Test message #1 say something funny",
+  "conversationId": "a9aab44c-1e23-475d-9129-9f02bd7b0ebb"
+}'
+wqzuccyhscbx
+
+
+
+curl -X POST https://fdefjilkbllgjldtqwwe.supabase.co/functions/v1/clever-endpoint \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6Ijg0OW10eGVsb0JCVGxLOFQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2ZkZWZqaWxrYmxsZ2psZHRxd3dlLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiIwNTFlZmU2My1jZGNhLTRhYTItYmU1Ny1hMjA2NWE0ZGEwMjAiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU0OTc5OTU1LCJpYXQiOjE3NTQ5NzYzNTUsImVtYWlsIjoidmN6YXJ0KzYybzcwdTU2ZW84cndAc2hhcmtsYXNlcnMuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJlbWFpbCI6InZjemFydCs2Mm83MHU1NmVvOHJ3QHNoYXJrbGFzZXJzLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaG9uZV92ZXJpZmllZCI6ZmFsc2UsInN1YiI6IjA1MWVmZTYzLWNkY2EtNGFhMi1iZTU3LWEyMDY1YTRkYTAyMCJ9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzU0OTc2MzU1fV0sInNlc3Npb25faWQiOiJjOGZmYzAzMS0zZmE1LTQxYTUtOTA1OS03NjdjMTZiMGI0OGIiLCJpc19hbm9ueW1vdXMiOmZhbHNlfQ.0e29xqe2oGJknFv6epK3HAwLVLReX5GsHY2xhD9sl2g" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "conversationId": "a9aab44c-1e23-475d-9129-9f02bd7b0ebb",
+    "prompt": "try to paint a more grim image i mean bruce wayne was pretty traumatized its only reasonable that alfred's effors were in vain"
+  }'

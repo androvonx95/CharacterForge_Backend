@@ -6,15 +6,12 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const router = express.Router();
-
-// Store contexts for different bots by their ID
-const contexts = {};
+ 
 
 
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
 
-// // Create a new bot instance
 // Create a new bot instance
 router.post("/create_bot", requireAuth, async (req, res) => {
   try {
@@ -96,45 +93,125 @@ router.post("/create_bot", requireAuth, async (req, res) => {
 });
 
 
-// Chat with a specific bot by ID
-router.post("/chat", requireAuth, async (req, res) => {
-  const { botID, message } = req.body;
 
-  if (!botID || !message) {
-    return res
-      .status(400)
-      .json({ error: "Both botID and message are required." });
-  }
 
-  const context = contexts[botID];
-  if (!context) {
-    return res.status(404).json({ error: "Bot ID not found." });
-  }
 
-  const messages = [...context, { role: "user", content: message }];
-  const response = await chat(messages);
+// // Chat with a specific bot by ID
+// router.post("/chat", requireAuth, async (req, res) => {
+//   const { botID, message } = req.body;
 
-  // Add the response to the context
-  context.push({ role: "assistant", content: response });
+//   if (!botID || !message) {
+//     return res
+//       .status(400)
+//       .json({ error: "Both botID and message are required." });
+//   }
 
-  res.json({ response });
-});
+//   const context = contexts[botID];
+//   if (!context) {
+//     return res.status(404).json({ error: "Bot ID not found." });
+//   }
 
-// General chat endpoint
-router.post('/api/chat', requireAuth, async (req, res) => {
+//   const messages = [...context, { role: "user", content: message }];
+//   const response = await chat(messages);
+
+//   // Add the response to the context
+//   context.push({ role: "assistant", content: response });
+
+//   res.json({ response });
+// });
+
+
+
+
+// Create a new chat with a specific bot-ID
+router.post("/new_chat", requireAuth, async (req, res) => {
   try {
-    const { messages } = req.body;
-    if (!messages || !Array.isArray(messages)) {
-      return res.status(400).json({ error: 'Messages array is required' });
+    const { bot_id } = req.body;
+    
+    // Validate required fields
+    if (!bot_id) {
+      return res.status(400).json({
+        error: 'Missing required fields',
+        details: 'Bot ID is required'
+      });
+    }
+
+    // Get the user's access token from the request
+    const authHeader = req.headers.authorization;
+    console.log("AuthHeader debug : " , authHeader);
+    if (!authHeader) {
+      return res.status(401).json({ 
+        error: 'Unauthorized',
+        details: 'Missing authorization header'
+      });
+    }
+
+    // Create Supabase client with the user's JWT
+    const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+      global: {
+        headers: { Authorization: authHeader }
+      }
+    });
+
+    // Get user data from the token
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+    console.log("USERDATA : " , userData)
+    if (userError || !userData?.user) {
+      return res.status(401).json({ 
+        error: 'Authentication error',
+        details: userError?.message || 'User not found'
+      });
     }
     
-    const response = await chat(messages);
-    res.json({ response });
-  } catch (error) {
-    console.error('Chat error:', error);
-    res.status(500).json({ error: 'Failed to process chat request' });
+    const userId = userData.user.id;
+ 
+    // Call the database function to create a new conversation
+    const { data, error: supabaseError } = await supabase
+      .rpc('add_conversation', {
+        p_character_id: bot_id,
+        p_user_id: userId
+      });
+
+    if (supabaseError) {
+      console.error('Error creating new conversation:', supabaseError);
+      return res.status(500).json({
+        error: 'Failed to create conversation',
+        details: supabaseError.message
+      }); 
+    }
+
+    res.status(201).json({
+      conversationId: data,
+      message: "Conversation created successfully."
+    });
+  } catch (err) {
+    console.error('Unexpected error:', err);
+    return res.status(500).json({
+      error: 'Internal server error',
+      details: err.message || 'Unknown error'
+    });
   }
 });
+
+
+
+
+
+// General chat endpoint
+// router.post('/api/chat', requireAuth, async (req, res) => {
+//   try {
+//     const { messages } = req.body;
+//     if (!messages || !Array.isArray(messages)) {
+//       return res.status(400).json({ error: 'Messages array is required' });
+//     }
+    
+//     const response = await chat(messages);
+//     res.json({ response });
+//   } catch (error) {
+//     console.error('Chat error:', error);
+//     res.status(500).json({ error: 'Failed to process chat request' });
+//   }
+// });
 
 module.exports = router;
 
