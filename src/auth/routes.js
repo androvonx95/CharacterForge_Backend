@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('./authController');
-const { requireAuth, requireRole } = require('./authMiddleware');
+const { requireAuth, requireRole, requireResetToken } = require('./authMiddleware');
 const { 
     signupValidation, 
     loginValidation, 
@@ -24,6 +24,7 @@ router.post('/verify-email', authController.verifyEmail);
 router.get('/me', requireAuth, authController.getCurrentUser);
 router.put('/profile', requireAuth, authController.updateProfile);
 router.put('/change-password', requireAuth, authController.changePassword);
+router.put('/reset-password-token', authController.resetPasswordWithToken);
 
 // Admin routes example
 router.get('/admin/users', requireRole(['admin']), (req, res) => {

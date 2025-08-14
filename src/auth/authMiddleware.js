@@ -28,13 +28,15 @@ const requireAuth = async (req, res, next) => {
     
     // Verify the token and get user
     const { data, error } = await supabase.auth.getUser(token);
-    
+    console.log( data );
+    console.log( error );
     if (error || !data.user) {
       return res.status(401).json({ error: 'Invalid or expired token' });
     }
     
     // Add the user to the request object
     req.user = data.user;
+    req.token = token;
     
     // Continue to the next middleware or route handler
     next();

@@ -42,7 +42,7 @@ app.get('/protected', require('./auth/authMiddleware').requireAuth, async (req, 
 
 // Basic route
 app.get('/', async (req, res) => {
-  res.json({ message: 'API is running' });
+  res.json({ message: 'Verified Email' });
 
 });
 

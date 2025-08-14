@@ -1,6 +1,18 @@
 // auth/authController.js
 const { supabase } = require('./config');
 
+
+
+const extractToken = (req) => {
+  if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+    return req.headers.authorization.split(' ')[1];
+  } else if (req.cookies && req.cookies.access_token) {
+    return req.cookies.access_token;
+  }
+  return null;
+};
+
+
 /**
  * User signup with email and password
  */
@@ -317,17 +329,61 @@ const changePassword = async (req, res) => {
     }
 };
 
+/**
+ * Reset password using reset token
+ */
+const resetPasswordWithToken = async (req, res) => {
+  try {
+    const { new_password, access_token, refresh_token } = req.body;
 
+    if (!new_password) {
+      return res.status(400).json({ error: 'New password is required' });
+    }
+    if (!access_token || !refresh_token) {
+      return res.status(400).json({ error: 'Missing access or refresh token' });
+    }
+    console.log( access_token );
+    console.log( refresh_token );
+    // ✅ Set the session using BOTH tokens
+    const { data: sessionData, error: sessionError } = await supabase.auth.setSession({
+      access_token,
+      refresh_token,
+    });
+
+    if (sessionError) {
+      console.error('setSession error:', sessionError);
+      return res.status(400).json({ error: sessionError.message });
+    }
+
+    // ✅ Now update the password
+    const { data, error } = await supabase.auth.updateUser({
+      password: new_password,
+    });
+
+    if (error) {
+      return res.status(400).json({ error: error.message });
+    }
+
+    // ✅ Sign out after reset
+    await supabase.auth.signOut();
+
+    return res.status(200).json({ message: 'Password reset successfully' });
+  } catch (error) {
+    console.error('Password reset error:', error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};   
 
 module.exports = {
     signup,
     login,
     logout,
-    getCurrentUser,
-    resetPassword,
-    changePassword,
-    updateProfile,
     refreshToken,
     resendVerificationEmail,
-    verifyEmail
+    verifyEmail,
+    getCurrentUser,
+    updateProfile,
+    changePassword,
+    resetPassword,
+    resetPasswordWithToken
 };
